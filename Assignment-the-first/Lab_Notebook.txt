@@ -1,0 +1,101 @@
+------------Bi622 Lab Notebook------------
+
+Initial Data Exploration:
+
+Files:
+```
+1294_S1_L008_R1_001.fastq.gz
+1294_S1_L008_R2_001.fastq.gz
+1294_S1_L008_R3_001.fastq.gz
+1294_S1_L008_R4_001.fastq.gz
+```
+
+directory: ```/projects/bgmp/shared/2017_sequencing/```
+
+
+Initial Data Exploration:
+
+Interactive Session:  srun --account=bgmp --partition=bgmp --nodes=1 --ntasks-per-node=1 --time=2:00:00 --cpus-per-task=1 --pty bash
+
+---------------------------------------------------
+zcat 1294_S1_L008_R1_001.fastq.gz | head
+
+@K00337:83:HJKJNBBXX:8:1101:1265:1191 1:N:0:1
+GNCTGGCATTCCCAGAGACATCAGTACCCAGTTGGTTCAGACAGTTCCTCTATTGGTTGACAAGGTCTTCATTTCTAGTGATATCAACACGGTGTCTACAA
++
+A#A-<FJJJ<JJJJJJJJJJJJJJJJJFJJJJFFJJFJJJAJJJJ-AJJJJJJJFFJJJJJJFFA-7<AJJJFFAJJJJJF<F--JJJJJJF-A-F7JJJJ
+@K00337:83:HJKJNBBXX:8:1101:1286:1191 1:N:0:1
+CNACCTGTCCCCAGCTCACAGGACAGCACACCAAAGGCGGCAACCCACACCCAGTTTTACAGCCACACAGTGCCTTGTTTTACTTGAGGACCCCCCACTCC
++
+A#AAFJJJJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJJJAJJJJJJJJJJJJJJFJJJJJFFFFJJJJJJJJJJJJJJJJJJ77F
+@K00337:83:HJKJNBBXX:8:1101:1347:1191 1:N:0:1
+GNGGTCTTCTACCTTTCTCTTCTTTTTTGGAGGAGTAGAATGTTGAGAGTCAGCAGTAGCCTCATCATCACTAGATGGCATTTCTTCTGAGCAAAACAGGT
+
+---------------------------------------------------
+
+zcat 1294_S1_L008_R2_001.fastq.gz | head
+
+@K00337:83:HJKJNBBXX:8:1101:1265:1191 2:N:0:1
+NCTTCGAC
++
+#AA<FJJJ
+@K00337:83:HJKJNBBXX:8:1101:1286:1191 2:N:0:1
+NACAGCGA
++
+#AAAFJJJ
+@K00337:83:HJKJNBBXX:8:1101:1347:1191 2:N:0:1
+NTCCTAAG
+
+---------------------------------------------------
+
+zcat 1294_S1_L008_R3_001.fastq.gz | head
+
+@K00337:83:HJKJNBBXX:8:1101:1265:1191 3:N:0:1
+NTCGAAGA
++
+#AAAAJJF
+@K00337:83:HJKJNBBXX:8:1101:1286:1191 3:N:0:1
+NCGCTGTT
++
+#AAAFJ-A
+@K00337:83:HJKJNBBXX:8:1101:1347:1191 3:N:0:1
+NTTAGGAC
+
+---------------------------------------------------
+
+ zcat 1294_S1_L008_R4_001.fastq.gz | head
+@K00337:83:HJKJNBBXX:8:1101:1265:1191 4:N:0:1
+NTTTTGATTTACCTTTCAGCCAATGAGAAGGCCGTTCATGCAGACTTTTTTAATGATTTTGAAGACCTTTTTGATGATGATGATGTCCAGTGAGGCCTCCC
++
+#AAFAFJJ-----F---7-<FA-F<AFFA-JJJ77<FJFJFJJJJJJJJJJAFJFFAJJJJJJJJFJF7-AFFJJ7F7JFJJFJ7FFF--A<A7<-A-7--
+@K00337:83:HJKJNBBXX:8:1101:1286:1191 4:N:0:1
+NTGTGTAGACAAAAGTTTTCATGAGTCTGTAAGCTGTCTATTGTCTCCTGAAAAGAAACCAGAAGTTTTCCCCTAAATGTGTTTAGAATGCTTATTCTAAT
++
+#A-AFFJJFJJJJJJJJJJJJJJJJ<JAJFJJJJF<JFJJJAJJJJJJJJJJJJJJJJJJJFJJJAJJFJJJFJJJF<JJA-JJJ-<AFAF--FF<JAFJF
+@K00337:83:HJKJNBBXX:8:1101:1347:1191 4:N:0:1
+NAAATGCCATCTAGTGATGATGAGGCTACTGCTGACTCTCAACATTCTACTCCTCCAAAAAAGAAGAGAAAGATTCCAACCCCCAGAACCGATGACCGGCA
+
+----------------------------------------------------
+
+We can see that R1 and R4 are the biological reads, while R2 and R3 are the index reads.
+We can see that the lengths of the reads are 101 for biological and 8 for index.
+We can see that the phred encoding is +33.
+
+To find the number of N bases in the indexes:
+
+zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz | sed -n "2~4p" | grep -F "N" | wc -l
+zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | sed -n "2~4p" | grep -F "N" | wc -l
+        3976613 indexes with an N (Index 1)
+        3328051 indexes with an N (Index 2)
+
+--------------------------------------------------
+
+Created python script part1.py 
+
+Created shell script python.sh
+
+Ran shell script to run python code on a node, to output pngs for assignment 1.
+
+-----------------------------------------------------
+
+    
